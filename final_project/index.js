@@ -1,7 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
-const { users } = require('./router/auth_users.js')
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
 
@@ -29,20 +28,6 @@ app.use("/customer/auth/*", function auth(req, res, next) {
   }
 });
 
-app.use("/register", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  if (username && password) {
-    if (!usernameExists(username)) {
-      users.push({ "username": username, "password": password });
-      return res.status(200).send(JSON.stringify({ message: `User ${username} created successfully!` }))
-    } else {
-      return res.status(404).send(JSON.stringify({ message: `User ${username} already exists!` }))
-    }
-  }
-  return res.status(404).send(JSON.stringify({ message: `Valid username and password not provided.` }))
-})
 
 const PORT = 5000;
 
