@@ -64,8 +64,7 @@ public_users.get('/author/:author', function (req, res) {
     (data) => res.status(200).send(JSON.stringify(data, null, 4)),
     (err) => res.status(404).send(JSON.stringify(err, null, 4))
   )
-}
-)
+});
 
 // Get all books based on title
 public_users.get('/title/:title', function (req, res) {
